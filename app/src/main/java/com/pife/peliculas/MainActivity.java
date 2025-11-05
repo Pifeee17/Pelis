@@ -10,11 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
+
+      ArrayList<Pelicula> peliculas;
 
       @Override
       protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
                   return insets;
             });
 
+            peliculas = rellenaPeliculas();
+            RecyclerView rv = findViewById(R.id.rv);
+            Adaptador ada = new Adaptador(peliculas);
+            rv.setAdapter(ada);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+            rv.setLayoutManager(gridLayoutManager);
 
       }
       public  void watchYoutubeVideo(String id){
@@ -42,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
       public ArrayList<Pelicula> rellenaPeliculas(){
 
-            ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
+      ArrayList<Pelicula> peliculas = new ArrayList<>();
 
             Calendar cal = Calendar.getInstance();
             cal.set(1982,12,3);
