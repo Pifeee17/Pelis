@@ -4,8 +4,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,6 +22,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
       ArrayList<Pelicula> peliculas;
+      GridLayoutManager gridLayoutManager;
 
       @Override
       protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
             RecyclerView rv = findViewById(R.id.rv);
             Adaptador ada = new Adaptador(peliculas);
             rv.setAdapter(ada);
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+           // gridLayoutManager = new GridLayoutManager(this,2);
+            gridLayoutManager = new GridLayoutManager(this,2, gridLayoutManager.HORIZONTAL,false);
             rv.setLayoutManager(gridLayoutManager);
 
       }
@@ -294,5 +299,25 @@ public class MainActivity extends AppCompatActivity {
             martian.setIdYoutube("OS23SmNlE3Y");
             peliculas.add(martian);
             return peliculas;
+      }
+
+      @Override
+      public boolean onCreateOptionsMenu(Menu menu) {
+
+            getMenuInflater().inflate(R.menu.prici, menu);
+            return true;
+      }
+
+      @Override
+      public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+            if(item.getItemId()==R.id.mGirar){
+                  int columnas = gridLayoutManager.getSpanCount();
+                  columnas++;
+                  if(columnas>3) columnas=1;
+                  gridLayoutManager.setSpanCount(columnas);
+            }
+
+            return true;
       }
 }
