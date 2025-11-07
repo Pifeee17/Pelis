@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -39,10 +40,12 @@ public class MainActivity extends AppCompatActivity {
             RecyclerView rv = findViewById(R.id.rv);
             Adaptador ada = new Adaptador(peliculas);
             rv.setAdapter(ada);
-           // gridLayoutManager = new GridLayoutManager(this,2);
-            gridLayoutManager = new GridLayoutManager(this,2, gridLayoutManager.HORIZONTAL,false);
+            gridLayoutManager = new GridLayoutManager(this,1);
             rv.setLayoutManager(gridLayoutManager);
 
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setTitle("Peliculas");
+            actionBar.setSubtitle(peliculas.size()+"");
       }
       public  void watchYoutubeVideo(String id){
             Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
@@ -314,10 +317,9 @@ public class MainActivity extends AppCompatActivity {
             if(item.getItemId()==R.id.mGirar){
                   int columnas = gridLayoutManager.getSpanCount();
                   columnas++;
-                  if(columnas>3) columnas=1;
+                  if(columnas>2) columnas=1;
                   gridLayoutManager.setSpanCount(columnas);
             }
-
             return true;
       }
 }

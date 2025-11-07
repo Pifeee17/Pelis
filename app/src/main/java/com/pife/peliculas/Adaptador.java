@@ -32,6 +32,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda>{
       Pelicula pelis = peliculas.get(position);
       holder.nombre.setText(pelis.getTitulo());
       holder.caratula.setImageResource(pelis.getPortada());
+      holder.director.setText(pelis.getDirector());
+      holder.tipo.setImageResource(pelis.getClasi());
 
       }
 
@@ -42,14 +44,16 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda>{
 
       public class MiCelda extends RecyclerView.ViewHolder{
 
-            TextView nombre;
-            ImageView caratula;
+            TextView nombre, director;
+            ImageView caratula, tipo;
 
             public MiCelda(@NonNull View itemView) {
                   super(itemView);
 
                   this.nombre=itemView.findViewById(R.id.tvNombre);
                   this.caratula=itemView.findViewById(R.id.ivCaratula);
+                  this.director=itemView.findViewById(R.id.tvDirector);
+                  this.tipo=itemView.findViewById(R.id.ivTipo);
             }
       }
 }
