@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/mGirar"
-        android:icon="@drawable/rotacion_foreground"
+        android:icon="@android:drawable/ic_popup_sync"
         android:title="Item"
         app:showAsAction="always" />
 </menu>

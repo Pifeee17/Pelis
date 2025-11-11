@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -38,7 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
             peliculas = rellenaPeliculas();
             RecyclerView rv = findViewById(R.id.rv);
-            Adaptador ada = new Adaptador(peliculas);
+            TextView tv = findViewById(R.id.textView);
+
+            Adaptador ada = new Adaptador(peliculas, new Adaptador.OnItemClickListener() {
+                  @Override
+                  public void onItemClick(Pelicula pelicula) {
+                        tv.setText(pelicula.getTitulo());
+                        // Si quieres también abrir el tráiler:
+                        // watchYoutubeVideo(pelicula.getIdYoutube());
+                  }
+            });
             rv.setAdapter(ada);
             gridLayoutManager = new GridLayoutManager(this,1);
             rv.setLayoutManager(gridLayoutManager);
@@ -46,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle("Peliculas");
             actionBar.setSubtitle(peliculas.size()+"");
+
       }
       public  void watchYoutubeVideo(String id){
             Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
