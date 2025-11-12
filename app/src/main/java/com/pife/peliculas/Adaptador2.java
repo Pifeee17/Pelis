@@ -73,11 +73,8 @@ public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
                               int pos = getAbsoluteAdapterPosition();
                               MainActivity2 ma2 = (MainActivity2) itemView.getContext();
                               Intent it2 = new Intent(ma2, MainActivity3.class);
+                              it2.putExtra("posicion", pos);
                               ma2.startActivity(it2);
-
-                              MainActivity3 ma3 = (MainActivity3) itemView.getContext();
-                              TextView tv = ((MainActivity3) itemView.getContext()).findViewById(R.id.tvDesc);
-                              tv.setText(peliculas.get(pos).getSinopsis());
 
                         }
                   });

@@ -2,6 +2,8 @@ package com.pife.peliculas;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -11,8 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity3 extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MainActivity3 extends AppCompatActivity {
+      ArrayList<Pelicula> peliculas;
       @Override
       protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -24,8 +28,19 @@ public class MainActivity3 extends AppCompatActivity {
                   return insets;
             });
             ActionBar actionBar = getSupportActionBar();
-            actionBar.setTitle("Pelicula");
+
             actionBar.setDisplayHomeAsUpEnabled(true);
+            peliculas = new MainActivity().rellenaPeliculas();
+
+            ImageView iv = findViewById(R.id.imageView);
+
+            TextView tv = findViewById(R.id.tvDesc);
+            int posicion = getIntent().getIntExtra("posicion",0);
+            peliculas = new MainActivity().rellenaPeliculas();
+            Pelicula pelicula = peliculas.get(posicion);
+            tv.setText(pelicula.getSinopsis());
+            iv.setImageResource(pelicula.getPortada());
+            actionBar.setTitle(pelicula.getTitulo());
       }
 
       @Override

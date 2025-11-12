@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
             peliculas = rellenaPeliculas();
             RecyclerView rv = findViewById(R.id.rv);
-            TextView tv = findViewById(R.id.textView);
+            TextView tv = findViewById(R.id.tvDesc);
 
             Adaptador ada = new Adaptador(peliculas, new Adaptador.OnItemClickListener() {
                   @Override
