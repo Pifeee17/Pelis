@@ -1,5 +1,6 @@
 package com.pife.peliculas;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,11 @@ import java.util.Locale;
 public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
       ArrayList<Pelicula> peliculas;
 
-      public interface OnItemClickListener {
-            void onItemClick(Pelicula pelicula);
-      }
 
-      private OnItemClickListener listener;
+      private AdapterView.OnItemClickListener listener;
 
 
-      public Adaptador2(ArrayList<Pelicula> peliculas, OnItemClickListener listener) {
+      public Adaptador2(ArrayList<Pelicula> peliculas) {
             this.peliculas = peliculas;
             this.listener = listener;
       }
@@ -48,12 +46,7 @@ public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
       holder.ivPort.setImageResource(pelicula.getPortada());
       holder.ivTip.setImageResource(pelicula.getClasi());
 
-      holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                  if(listener!=null) listener.onItemClick(pelicula);
-            }
-      });
+
 
       }
 
@@ -74,6 +67,20 @@ public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
                   tvFec=itemView.findViewById(R.id.tvFec);
                   tvDur=itemView.findViewById(R.id.tvDur);
                   tvSala=itemView.findViewById(R.id.tvSala);
+                  itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                              int pos = getAbsoluteAdapterPosition();
+                              MainActivity2 ma2 = (MainActivity2) itemView.getContext();
+                              Intent it2 = new Intent(ma2, MainActivity3.class);
+                              ma2.startActivity(it2);
+
+                              MainActivity3 ma3 = (MainActivity3) itemView.getContext();
+                              TextView tv = ((MainActivity3) itemView.getContext()).findViewById(R.id.tvDesc);
+                              tv.setText(peliculas.get(pos).getSinopsis());
+
+                        }
+                  });
             }
       }
 }

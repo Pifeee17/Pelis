@@ -46,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
                   @Override
                   public void onItemClick(Pelicula pelicula) {
                         tv.setText(pelicula.getTitulo());
-                        // Si quieres también abrir el tráiler:
-                        // watchYoutubeVideo(pelicula.getIdYoutube());
                   }
             });
             rv.setAdapter(ada);

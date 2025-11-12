@@ -16,7 +16,6 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
       ArrayList<Pelicula> peliculas;
       private int num_colum;
 
-      //Asegúrate de tener esto dentro de la clase Adaptador
       public interface OnItemClickListener {
             void onItemClick(Pelicula pelicula);
       }
