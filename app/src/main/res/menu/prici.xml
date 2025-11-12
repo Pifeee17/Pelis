@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mDescripcion"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="Item"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/mGirar"
         android:icon="@android:drawable/ic_popup_sync"
         android:title="Item"

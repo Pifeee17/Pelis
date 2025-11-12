@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Peliculas</string>
+    <string name="app_name">Peliculas:</string>
+    <string name="director">Director:</string>
+    <string name="fecha">Fecha:</string>
+    <string name="duracion">Duracion:</string>
+    <string name="sala">Sala:</string>
 </resources>

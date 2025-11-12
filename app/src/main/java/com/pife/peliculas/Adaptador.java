@@ -16,14 +16,14 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
       ArrayList<Pelicula> peliculas;
       private int num_colum;
 
-      // 👇 Asegúrate de tener esto dentro de la clase Adaptador
+      //Asegúrate de tener esto dentro de la clase Adaptador
       public interface OnItemClickListener {
             void onItemClick(Pelicula pelicula);
       }
 
       private OnItemClickListener listener;
 
-      // 👇 Constructor que recibe la lista y el listener
+      //Constructor que recibe la lista y el listener
       public Adaptador(ArrayList<Pelicula> peliculas, OnItemClickListener listener) {
             this.peliculas = peliculas;
             this.listener = listener;
@@ -51,7 +51,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
                   holder.caratula.getLayoutParams().width = 200;
             }
 
-            // 👇 Esto llama al listener cuando se pulsa una celda
+            //Esto llama al listener cuando se pulsa una celda
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {

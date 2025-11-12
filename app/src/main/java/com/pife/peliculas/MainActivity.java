@@ -331,6 +331,12 @@ public class MainActivity extends AppCompatActivity {
                   columnas++;
                   if(columnas>2) columnas=1;
                   gridLayoutManager.setSpanCount(columnas);
+                  return true;
+            }
+            else if(item.getItemId()==R.id.mDescripcion) {
+            Intent it = new Intent(this, MainActivity2.class);
+            startActivity(it);
+                  return true;
             }
             return true;
       }
