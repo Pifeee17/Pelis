@@ -1,7 +1,11 @@
 package com.pife.peliculas;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +45,14 @@ public class MainActivity3 extends AppCompatActivity {
             tv.setText(pelicula.getSinopsis());
             iv.setImageResource(pelicula.getPortada());
             actionBar.setTitle(pelicula.getTitulo());
+            iv.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                        String video = pelicula.getIdYoutube();
+                        Intent it = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + video));
+                              startActivity(it);
+                  }
+            });
       }
 
       @Override
