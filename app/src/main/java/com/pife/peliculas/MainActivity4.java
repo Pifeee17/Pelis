@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 public class MainActivity4 extends AppCompatActivity {
 ArrayList<Pelicula> peliculas;
+      ListView lv;
       @Override
       protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -57,8 +59,12 @@ ArrayList<Pelicula> peliculas;
       public boolean onOptionsItemSelected(@NonNull MenuItem item) {
             if(item.getItemId()==android.R.id.home){
                   getOnBackPressedDispatcher().onBackPressed();
-            }
+            } else if (item.getItemId()==R.id.mGuardar) {
+                  int posicion = getIntent().getIntExtra("posicion",0);
+                  Pelicula pelicula = peliculas.get(posicion);
+                  lv.setItemChecked(posicion,true);
 
+            }
             return super.onOptionsItemSelected(item);
       }
 }
