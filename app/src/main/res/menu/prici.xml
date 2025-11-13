@@ -8,6 +8,11 @@
         android:title="Item"
         app:showAsAction="always" />
     <item
+        android:id="@+id/mLike"
+        android:icon="@android:drawable/star_big_off"
+        android:title="Item"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/mGirar"
         android:icon="@android:drawable/ic_popup_sync"
         android:title="Item"

@@ -334,6 +334,9 @@ public class MainActivity extends AppCompatActivity {
             Intent it = new Intent(this, MainActivity2.class);
             startActivity(it);
                   return true;
+            }else if(item.getItemId()==R.id.mLike){
+                  Intent it2 = new Intent(this, MainActivity4.class);
+                  startActivity(it2);
             }
             return true;
       }
