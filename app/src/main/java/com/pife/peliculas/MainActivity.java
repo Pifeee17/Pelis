@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
             peliculas = rellenaPeliculas();
             RecyclerView rv = findViewById(R.id.rv);
+
             TextView tv = findViewById(R.id.tvDesc);
 
             Adaptador ada = new Adaptador(peliculas, new Adaptador.OnItemClickListener() {
@@ -337,6 +338,9 @@ public class MainActivity extends AppCompatActivity {
             }else if(item.getItemId()==R.id.mLike){
                   Intent it2 = new Intent(this, MainActivity4.class);
                   startActivity(it2);
+            }else if(item.getItemId()==R.id.mNueva){
+                  Intent it3 = new Intent(this, MainActivity5.class);
+                  startActivity(it3);
             }
             return true;
       }

@@ -13,6 +13,11 @@
         android:title="Item"
         app:showAsAction="always" />
     <item
+        android:id="@+id/mNueva"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Item"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/mGirar"
         android:icon="@android:drawable/ic_popup_sync"
         android:title="Item"

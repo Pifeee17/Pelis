@@ -14,6 +14,22 @@ import java.util.ArrayList;
 public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
 
       ArrayList<Pelicula> peliculas;
+      int pos;
+
+      public int getPos() {
+            return pos;
+      }
+
+      public void setPos(int poss) {
+            if(this.pos == poss){
+                  this.pos=RecyclerView.NO_POSITION;
+                  notifyItemChanged(poss);
+            }else{
+                  this.pos=poss;
+                  notifyItemChanged(this.pos);
+            }
+      }
+
       private int num_colum;
 
       public interface OnItemClickListener {
@@ -42,6 +58,12 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
             holder.caratula.setImageResource(pelis.getPortada());
             holder.director.setText(pelis.getDirector());
             holder.tipo.setImageResource(pelis.getClasi());
+
+            if(position==this.pos){
+                  holder.itemView.setBackgroundResource(R.color.marcado);
+            }else {
+                  holder.itemView.setBackgroundResource(R.color.nomarcado);
+            }
 
             if (num_colum == 2) {
                   holder.nombre.setTextSize(14);
@@ -74,6 +96,13 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
                   caratula = itemView.findViewById(R.id.ivCaratula);
                   director = itemView.findViewById(R.id.tvDirector);
                   tipo = itemView.findViewById(R.id.ivTipo);
+                  itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                              int pos=getAbsoluteAdapterPosition();
+                              setPos(pos);
+                        }
+                  });
             }
       }
 }
