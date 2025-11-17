@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
       ArrayList<Pelicula> peliculas;
       GridLayoutManager gridLayoutManager;
 
+      Adaptador ada;
       @Override
       protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -42,14 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
             TextView tv = findViewById(R.id.tvDesc);
 
-            Adaptador ada = new Adaptador(peliculas, new Adaptador.OnItemClickListener() {
-                  @Override
-                  public void onItemClick(Pelicula pelicula) {
-                        tv.setText(pelicula.getTitulo());
-                  }
-            });
+             ada = new Adaptador(peliculas);
+
+//            Adaptador ada = new Adaptador(peliculas, new Adaptador.OnItemClickListener() {
+//                  @Override
+//                  public void onItemClick(Pelicula pelicula) {
+//                        tv.setText(pelicula.getTitulo());
+//                  }
+//            });
             rv.setAdapter(ada);
             gridLayoutManager = new GridLayoutManager(this,1);
+            ada.setNum_colum(gridLayoutManager.getSpanCount());
             rv.setLayoutManager(gridLayoutManager);
 
             ActionBar actionBar = getSupportActionBar();
@@ -329,6 +333,8 @@ public class MainActivity extends AppCompatActivity {
                   columnas++;
                   if(columnas>2) columnas=1;
                   gridLayoutManager.setSpanCount(columnas);
+                  ada.setNum_colum(gridLayoutManager.getSpanCount());
+                  ada.notifyDataSetChanged();
                   return true;
             }
             else if(item.getItemId()==R.id.mDescripcion) {

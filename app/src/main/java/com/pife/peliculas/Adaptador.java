@@ -20,29 +20,43 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
             return pos;
       }
 
-      public void setPos(int poss) {
-            if(this.pos == poss){
+      public void setPos(int posPulsada) {
+            if(this.pos == posPulsada){
                   this.pos=RecyclerView.NO_POSITION;
-                  notifyItemChanged(poss);
+                  notifyItemChanged(posPulsada);
             }else{
-                  this.pos=poss;
+                  notifyItemChanged(this.pos);
+                  this.pos=posPulsada;
                   notifyItemChanged(this.pos);
             }
       }
 
-      private int num_colum;
+      private int num_colum=2;
 
-      public interface OnItemClickListener {
-            void onItemClick(Pelicula pelicula);
+      public int getNum_colum() {
+            return num_colum;
       }
 
-      private OnItemClickListener listener;
+      public void setNum_colum(int num_colum) {
+            this.num_colum = num_colum;
+      }
+
+      //      public interface OnItemClickListener {
+//            void onItemClick(Pelicula pelicula);
+//      }
+
+//      private OnItemClickListener listener;
 
       //Constructor que recibe la lista y el listener
-      public Adaptador(ArrayList<Pelicula> peliculas, OnItemClickListener listener) {
+//      public Adaptador(ArrayList<Pelicula> peliculas, OnItemClickListener listener) {
+//            this.peliculas = peliculas;
+//            this.listener = listener;
+//      }
+      public Adaptador(ArrayList<Pelicula> peliculas) {
             this.peliculas = peliculas;
-            this.listener = listener;
+//            this.listener = listener;
       }
+
 
       @NonNull
       @Override
@@ -70,15 +84,27 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
                   holder.director.setTextSize(10);
                   holder.caratula.getLayoutParams().height = 300;
                   holder.caratula.getLayoutParams().width = 200;
+                  holder.tipo.getLayoutParams().height=50;
+                  holder.tipo.getLayoutParams().width=50;
+            }else {
+
+                  if (num_colum == 1) {
+                        holder.nombre.setTextSize(24);
+                        holder.director.setTextSize(20);
+                        holder.caratula.getLayoutParams().height = 400;
+                        holder.caratula.getLayoutParams().width = 300;
+                        holder.tipo.getLayoutParams().height=150;
+                        holder.tipo.getLayoutParams().width=150;
+                  }
             }
 
-            //Esto llama al listener cuando se pulsa una celda
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-                        if (listener != null) listener.onItemClick(pelis);
-                  }
-            });
+//            //Esto llama al listener cuando se pulsa una celda
+//            holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                  @Override
+//                  public void onClick(View v) {
+//                        if (listener != null) listener.onItemClick(pelis);
+//                  }
+//            });
       }
 
       @Override
@@ -101,6 +127,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.MiCelda> {
                         public void onClick(View v) {
                               int pos=getAbsoluteAdapterPosition();
                               setPos(pos);
+                              TextView tv=((MainActivity)itemView.getContext()).findViewById(R.id.tvDesc);
+                                      tv.setText(peliculas.get(pos).getTitulo());
                         }
                   });
             }

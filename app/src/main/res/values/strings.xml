@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">Peliculas:</string>
+    <string name="app_name">Peliculas</string>
     <string name="director">Director:</string>
     <string name="fecha">Fecha:</string>
     <string name="duracion">Duracion:</string>
     <string name="sala">Sala:</string>
+    <string name="clasificacion">Clasifición por edades:</string>
+    <string name="G">G</string>
+    <string name="PG">PG</string>
+    <string name="R">R</string>
+    <string name="PG13">PG-13</string>
+    <string name="NC17">NC-17</string>
+    <string name="Estreno">Fecha de Estreno:</string>
 </resources>
