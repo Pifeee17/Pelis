@@ -126,4 +126,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPort" />
 
+    <ImageView
+        android:id="@+id/ivCora"
+        android:layout_width="30dp"
+        android:layout_height="33dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:srcCompat="@drawable/cora" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

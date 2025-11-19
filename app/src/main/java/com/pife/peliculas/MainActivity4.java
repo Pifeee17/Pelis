@@ -1,5 +1,6 @@
 package com.pife.peliculas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,10 +43,18 @@ ArrayList<Pelicula> peliculas;
                   titulos.add(pelicula.getTitulo() + "\n" + pelicula.getDirector());
             }
             ListView lv = findViewById(R.id.lv);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_checked,titulos);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_checked, titulos);
             lv.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
             lv.setAdapter(adapter);
-            lv.setItemChecked(2,true);
+            ArrayList<Integer> marcadas = getIntent().getIntegerArrayListExtra("marcadas");
+
+            if (marcadas != null) {
+                  for (int i = 0; i < marcadas.size(); i++) {
+                        lv.setItemChecked(marcadas.get(i), true);
+                  }
+            }
+
+            lv.setItemChecked(2, true);
 
       }
 
@@ -59,9 +68,23 @@ ArrayList<Pelicula> peliculas;
       public boolean onOptionsItemSelected(@NonNull MenuItem item) {
             if(item.getItemId()==android.R.id.home){
                   getOnBackPressedDispatcher().onBackPressed();
-            } else if (item.getItemId()==R.id.mGuardar) {
-                  int posicion = getIntent().getIntExtra("posicion",0);
+            }
+            else if (item.getItemId()==R.id.mGuardar) {
 
+                  ListView lv = findViewById(R.id.lv);
+
+                  ArrayList<Integer> seleccionadas = new ArrayList<>();
+
+                  for (int i = 0; i < lv.getCount(); i++){
+                        if (lv.isItemChecked(i)){
+                              seleccionadas.add(i);
+                        }
+                  }
+
+                  Intent intent = new Intent();
+                  intent.putIntegerArrayListExtra("seleccionadas", seleccionadas);
+                  setResult(RESULT_OK, intent);
+                  finish();
             }
             return super.onOptionsItemSelected(item);
       }

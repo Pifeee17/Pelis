@@ -17,13 +17,15 @@ import java.util.Locale;
 
 public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
       ArrayList<Pelicula> peliculas;
+      ArrayList<Integer> seleccionadas;
 
 
       private AdapterView.OnItemClickListener listener;
 
 
-      public Adaptador2(ArrayList<Pelicula> peliculas) {
+      public Adaptador2(ArrayList<Pelicula> peliculas, ArrayList<Integer> seleccionadas) {
             this.peliculas = peliculas;
+            this.seleccionadas = seleccionadas;
             this.listener = listener;
       }
 
@@ -45,6 +47,11 @@ public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
       holder.tvDur.setText(String.valueOf(pelicula.getDuracion()));
       holder.ivPort.setImageResource(pelicula.getPortada());
       holder.ivTip.setImageResource(pelicula.getClasi());
+            if (seleccionadas != null && seleccionadas.contains(position)) {
+                  holder.ivCora.setVisibility(View.VISIBLE);
+            } else {
+                  holder.ivCora.setVisibility(View.GONE);
+            }
 
 
 
@@ -56,7 +63,7 @@ public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
       }
 
       public class MiCelda2 extends  RecyclerView.ViewHolder {
-          ImageView ivPort, ivTip;
+          ImageView ivPort, ivTip, ivCora;
           TextView tvTitulo, tvDir, tvFec, tvDur, tvSala;
             public MiCelda2(@NonNull View itemView) {
                   super(itemView);
@@ -67,6 +74,10 @@ public class Adaptador2 extends RecyclerView.Adapter<Adaptador2.MiCelda2>{
                   tvFec=itemView.findViewById(R.id.tvFec);
                   tvDur=itemView.findViewById(R.id.tvDur);
                   tvSala=itemView.findViewById(R.id.tvSala);
+                  ivCora=itemView.findViewById(R.id.ivCora);
+
+
+
                   itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

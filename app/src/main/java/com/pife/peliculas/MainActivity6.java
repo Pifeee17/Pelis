@@ -1,9 +1,9 @@
 package com.pife.peliculas;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -12,47 +12,60 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity6 extends AppCompatActivity {
+      ListView lv2;
+      ArrayList<Integer> listaMarcadas;
       ArrayList<Pelicula> peliculas;
-      GridLayoutManager gridLayoutManager;
+
       @Override
       protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             EdgeToEdge.enable(this);
-            setContentView(R.layout.activity_main2);
+            setContentView(R.layout.activity_main6);
             ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
                   Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
                   v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
                   return insets;
             });
+
+          listaMarcadas = getIntent().getIntegerArrayListExtra("marcadas");
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Peliculas");
 
-            ArrayList<Integer> listaMarcadas = getIntent().getIntegerArrayListExtra("marcadas");
+            lv2 = findViewById(R.id.lv2);
+            ArrayList<Integer> seleccionadas;
 
-            RecyclerView rv = findViewById(R.id.rv);
+            // Obtener posiciones seleccionadas desde MainActivity
+            seleccionadas = getIntent().getIntegerArrayListExtra("seleccionadas");
+
+            // Obtener todas las películas
             peliculas = new MainActivity().rellenaPeliculas();
-            Adaptador2 ada2 = new Adaptador2(peliculas, listaMarcadas);
 
-            rv.setAdapter(ada2);
-            gridLayoutManager = new GridLayoutManager(this,1);
-            rv.setLayoutManager(gridLayoutManager);
+            // Crear lista solo con las seleccionadas
+            ArrayList<String> titulosSeleccionados = new ArrayList<>();
+            if(seleccionadas != null) {
+                  for(int pos : seleccionadas){
+                        titulosSeleccionados.add(peliculas.get(pos).getTitulo());
+                  }
+            }
 
-
+            // Mostrar en ListView
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1, titulosSeleccionados);
+            lv2.setAdapter(adapter);
 
       }
 
       @Override
       public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-            if(item.getItemId()==android.R.id.home) {
+
+            if(item.getItemId()==android.R.id.home){
                   getOnBackPressedDispatcher().onBackPressed();
             }
+
             return super.onOptionsItemSelected(item);
       }
 }

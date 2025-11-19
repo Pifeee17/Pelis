@@ -7,8 +7,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
       ArrayList<Pelicula> peliculas;
       GridLayoutManager gridLayoutManager;
+
+      ArrayList<Integer> seleccionGuardada = new ArrayList<>();
 
       Adaptador ada;
       @Override
@@ -61,6 +68,27 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setSubtitle(peliculas.size()+"");
 
       }
+      private ActivityResultLauncher<Intent> launcher= registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                  // Verificamos que el resultado fue OK (setResult(RESULT_OK))
+                  if (result.getResultCode() == RESULT_OK) {
+                        // Obtenemos el Intent que mandó MainActivity4
+                        Intent data = result.getData();
+                        // Recuperamos la lista de posiciones seleccionadas
+                        ArrayList<Integer> seleccionadas = data.getIntegerArrayListExtra("seleccionadas");
+                        if (seleccionadas != null) {
+                              seleccionGuardada = seleccionadas;
+
+                              for (int i = 0; i < seleccionadas.size(); i++) {
+                                    // Cada posición dentro del ListView
+                                    int pos = seleccionadas.get(i);
+                                    Pelicula p = peliculas.get(pos);
+                              }
+                        }
+                  }
+            }
+      });
       public  void watchYoutubeVideo(String id){
             Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
             Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + id));
@@ -338,15 +366,23 @@ public class MainActivity extends AppCompatActivity {
                   return true;
             }
             else if(item.getItemId()==R.id.mDescripcion) {
-            Intent it = new Intent(this, MainActivity2.class);
-            startActivity(it);
+                  Intent it = new Intent(this, MainActivity2.class);
+                  it.putIntegerArrayListExtra("marcadas", seleccionGuardada);
+                  launcher.launch(it);
+
                   return true;
             }else if(item.getItemId()==R.id.mLike){
                   Intent it2 = new Intent(this, MainActivity4.class);
-                  startActivity(it2);
+                  it2.putIntegerArrayListExtra("marcadas", seleccionGuardada);
+                  launcher.launch(it2);
+
             }else if(item.getItemId()==R.id.mNueva){
                   Intent it3 = new Intent(this, MainActivity5.class);
                   startActivity(it3);
+            }else if(item.getItemId()==R.id.mFav){
+                  Intent it4 = new Intent(this, MainActivity6.class);
+                  it4.putIntegerArrayListExtra("seleccionadas", seleccionGuardada);
+                  startActivity(it4);
             }
             return true;
       }
