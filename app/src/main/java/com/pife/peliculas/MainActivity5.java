@@ -3,6 +3,12 @@ package com.pife.peliculas;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -11,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
 
 public class MainActivity5 extends AppCompatActivity {
 
@@ -27,6 +35,13 @@ public class MainActivity5 extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle("Nueva película");
             actionBar.setDisplayHomeAsUpEnabled(true);
+
+            String[] salas={"Gran via","Travesía", "Plaza eliptica", "Vialia", "Multicines Norte"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, salas);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+            Spinner spinner = findViewById(R.id.spinner);
+            spinner.setAdapter(adapter);
+
       }
 
       @Override
@@ -40,7 +55,9 @@ public class MainActivity5 extends AppCompatActivity {
             if(item.getItemId()==android.R.id.home){
                   getOnBackPressedDispatcher().onBackPressed();
             }else if(item.getItemId()==R.id.mGuardar){
-
+                  EditText etTitulo = findViewById(R.id.editTextText);
+                  EditText etDirecor = findViewById(R.id.editTextText2);
+                  EditText etDuracion = findViewById(R.id.editTextText3);
             }
 
             return super.onOptionsItemSelected(item);

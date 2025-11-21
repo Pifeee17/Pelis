@@ -1,11 +1,13 @@
 package com.pife.peliculas;
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class Pelicula implements Serializable{
-      String titulo, director, sinopsis, sala, idYoutube;
+      String titulo, director, sinopsis,  idYoutube;
       int clasi, portada, duracion;
       Date fecha;
       boolean favorita;
@@ -17,7 +19,7 @@ public class Pelicula implements Serializable{
             this.director=director;
             this.fecha=fecha;
             this.portada=portada;
-            this.sala=sala;
+
             this.titulo=titulo;
             this.duracion=duracion;
             this.favorita=false;
@@ -59,12 +61,7 @@ public class Pelicula implements Serializable{
       public void setPortada(int portada) {
             this.portada=portada;
       }
-      public String getSala() {
-            return sala;
-      }
-      public void setSala(String sala) {
-            this.sala=sala;
-      }
+
       public String getSinopsis() {
             return sinopsis;
       }
@@ -83,5 +80,11 @@ public class Pelicula implements Serializable{
       }
       public void setDuracion(int duracion) {
             this.duracion=duracion;
+      }
+
+      @NonNull
+      @Override
+      public String toString() {
+            return titulo;
       }
 }

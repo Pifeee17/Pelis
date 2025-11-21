@@ -159,4 +159,13 @@
         app:layout_constraintStart_toStartOf="@+id/tvEstreno"
         app:layout_constraintTop_toBottomOf="@+id/tvEstreno" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSala"
+        app:layout_constraintStart_toEndOf="@+id/tvSala"
+        app:layout_constraintTop_toTopOf="@+id/tvSala" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
