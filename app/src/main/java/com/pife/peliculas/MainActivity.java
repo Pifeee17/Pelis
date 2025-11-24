@@ -2,6 +2,8 @@ package com.pife.peliculas;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle("Peliculas");
             actionBar.setSubtitle(peliculas.size()+"");
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
 
       }
       private ActivityResultLauncher<Intent> launcher= registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             public void onActivityResult(ActivityResult result) {
                   // Verificamos que el resultado fue OK (setResult(RESULT_OK))
                   if (result.getResultCode() == RESULT_OK) {
-                        // Obtenemos el Intent que mandó MainActivity4
+                        // Obtenemos el Intent que manda MainActivity4
                         Intent data = result.getData();
                         // Recuperamos la lista de posiciones seleccionadas
                         ArrayList<Integer> seleccionadas = data.getIntegerArrayListExtra("seleccionadas");
@@ -87,6 +90,21 @@ public class MainActivity extends AppCompatActivity {
                               }
                         }
                   }
+            }
+      });
+      private ActivityResultLauncher<Intent> launcherNueva = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if(result.getResultCode() == RESULT_OK){
+                      Intent data = result.getData();
+                      if(data!= null && data.hasExtra("nuevaPeli")){
+                            Pelicula nueva = (Pelicula) data.getSerializableExtra("nuevaPeli");
+                            if(nueva!=null){
+                                  peliculas.add(nueva);
+                                  ada.notifyDataSetChanged();
+                            }
+                      }
+                }
             }
       });
       public  void watchYoutubeVideo(String id){
@@ -378,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
 
             }else if(item.getItemId()==R.id.mNueva){
                   Intent it3 = new Intent(this, MainActivity5.class);
-                  startActivity(it3);
+                  launcherNueva.launch(it3);
             }else if(item.getItemId()==R.id.mFav){
                   Intent it4 = new Intent(this, MainActivity6.class);
                   it4.putIntegerArrayListExtra("seleccionadas", seleccionGuardada);

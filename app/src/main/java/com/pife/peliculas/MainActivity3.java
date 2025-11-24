@@ -2,6 +2,8 @@ package com.pife.peliculas;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -32,9 +34,8 @@ public class MainActivity3 extends AppCompatActivity {
                   return insets;
             });
             ActionBar actionBar = getSupportActionBar();
-
             actionBar.setDisplayHomeAsUpEnabled(true);
-            peliculas = new MainActivity().rellenaPeliculas();
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
 
             ImageView iv = findViewById(R.id.imageView);
 

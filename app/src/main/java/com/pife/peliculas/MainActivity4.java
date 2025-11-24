@@ -1,6 +1,8 @@
 package com.pife.peliculas;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +40,7 @@ ArrayList<Pelicula> peliculas;
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle("Peliculas");
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
             ArrayList<String> titulos = new ArrayList<>();
             for (Pelicula pelicula : peliculas) {
                   titulos.add(pelicula.getTitulo() + "\n" + pelicula.getDirector());

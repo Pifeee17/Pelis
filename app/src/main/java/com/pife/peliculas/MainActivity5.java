@@ -1,5 +1,8 @@
 package com.pife.peliculas;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +23,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity5 extends AppCompatActivity {
 
@@ -35,6 +40,7 @@ public class MainActivity5 extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle("Nueva película");
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
 
             String[] salas={"Gran via","Travesía", "Plaza eliptica", "Vialia", "Multicines Norte"};
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, salas);
@@ -56,8 +62,35 @@ public class MainActivity5 extends AppCompatActivity {
                   getOnBackPressedDispatcher().onBackPressed();
             }else if(item.getItemId()==R.id.mGuardar){
                   EditText etTitulo = findViewById(R.id.editTextText);
-                  EditText etDirecor = findViewById(R.id.editTextText2);
+                  EditText etDirector = findViewById(R.id.editTextText2);
                   EditText etDuracion = findViewById(R.id.editTextText3);
+                  Spinner spinner = findViewById(R.id.spinner);
+                  int imagenSeleccionada = 0;
+                  RadioGroup radioGroup = findViewById(R.id.radioGroup);
+                  if (radioGroup.getCheckedRadioButtonId()==R.id.radioButton){
+                       imagenSeleccionada = R.drawable.g;
+                  } else if (radioGroup.getCheckedRadioButtonId()==R.id.radioButton2) {
+                       imagenSeleccionada = R.drawable.pg;
+                  } else if (radioGroup.getCheckedRadioButtonId()==R.id.radioButton3) {
+                        imagenSeleccionada = R.drawable.r;
+                  } else if (radioGroup.getCheckedRadioButtonId()==R.id.radioButton4) {
+                        imagenSeleccionada = R.drawable.pg13;
+                  }else if (radioGroup.getCheckedRadioButtonId()==R.id.radioButton5){
+                        imagenSeleccionada = R.drawable.nc17;
+                  }
+
+                  String titulo = etTitulo.getText().toString();
+                  String director = etDirector.getText().toString();
+                  Integer duracion = Integer.parseInt(etDuracion.getText().toString());
+                  String sala = spinner.getSelectedItem().toString();
+
+
+                  Pelicula nueva = new Pelicula(titulo,director, duracion,new Date(),sala, imagenSeleccionada, 0);
+
+                  Intent intent = new Intent();
+                  intent.putExtra("nuevaPeli", nueva);
+                  setResult(RESULT_OK,intent);
+                  finish();
             }
 
             return super.onOptionsItemSelected(item);

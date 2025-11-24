@@ -1,6 +1,8 @@
 package com.pife.peliculas;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -33,6 +35,7 @@ public class MainActivity2 extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Peliculas");
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
 
             ArrayList<Integer> listaMarcadas = getIntent().getIntegerArrayListExtra("marcadas");
 
